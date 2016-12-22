@@ -2,7 +2,7 @@ module Alipay
   module Mobile
     module Service
       MOBILE_SECURITY_PAY_REQUIRED_PARAMS = %w( notify_url out_trade_no subject total_fee body )
-      def self.mobile_securitypay_pay_string(params, options = {})
+      def self.trade_app_pay(params, options = {})
         params = Utils.stringify_keys(params)
         Alipay::Service.check_required_params(params, MOBILE_SECURITY_PAY_REQUIRED_PARAMS)
         sign_type = options[:sign_type] || Alipay.sign_type
@@ -10,10 +10,10 @@ module Alipay
         raise ArgumentError, "only support RSA sign_type" if sign_type != 'RSA'
 
         params = {
-          'service'        => 'mobile.securitypay.pay',
+          'service'        => 'alipay.trade.app.pay',
           '_input_charset' => 'utf-8',
-          'partner'        => options[:pid] || Alipay.pid,
-          'seller_id'      => options[:pid] || Alipay.pid,
+          'seller'         => options[:seller] || Alipay.seller,
+          'app_id'         => options[:app_id] || Alipay.app_id,
           'payment_type'   => '1'
         }.merge(params)
 
