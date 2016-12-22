@@ -2,7 +2,7 @@ module Alipay
   module Mobile
     module Service
       MOBILE_SECURITY_PAY_REQUIRED_PARAMS = %w( notify_url out_trade_no subject total_fee body )
-      def self.trade_app_pay(params, options = {})
+      def self.trade_app_pay_string(params, options = {})
         params = Utils.stringify_keys(params)
         Alipay::Service.check_required_params(params, MOBILE_SECURITY_PAY_REQUIRED_PARAMS)
         sign_type = options[:sign_type] || Alipay.sign_type
@@ -12,8 +12,8 @@ module Alipay
         params = {
           'service'        => 'alipay.trade.app.pay',
           '_input_charset' => 'utf-8',
-          'seller'         => options[:seller] || Alipay.seller,
           'app_id'         => options[:app_id] || Alipay.app_id,
+          'private_key'    => key,
           'payment_type'   => '1'
         }.merge(params)
 
