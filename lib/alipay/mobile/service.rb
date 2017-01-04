@@ -31,7 +31,6 @@ module Alipay
         }
 
         options = Utils.stringify_keys(options)
-        byebug
         string = Alipay::Mobile::Sign.params_to_string(options)
                                      .gsub('=>', ':')
                                      .gsub(/\s/, '')
