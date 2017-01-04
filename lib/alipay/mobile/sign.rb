@@ -2,7 +2,10 @@ module Alipay
   module Mobile
     module Sign
       def self.params_to_string(params)
-        params.map { |key, value| %Q(#{key}="#{value}") }.join('&')
+        result = params.sort.map do |key, value|
+          %Q(#{key}=#{value.to_s})
+        end
+        result.join('&')
       end
     end
   end

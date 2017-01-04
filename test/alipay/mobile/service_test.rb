@@ -1,16 +1,20 @@
 require 'test_helper'
+require 'uri'
 
 class Alipay::Mobile::ServiceTest < Minitest::Test
   def test_trade_app_pay_string
-    assert_equal %q(service="mobile.securitypay.pay"&_input_charset="utf-8"&app_id="1000000000000000"&seller="1000000000000000"&payment_type="1"&out_trade_no="1"&notify_url="/some_url"&subject="subject"&total_fee="0.01"&body="test"&sign="if1qjK4qnT7eQ5fw%2BBddHhO1LY6iuPY9Xmhkx81YKuCdceKWBdv798j%2BrxF9ZAhNW4Y3TMURm%2BXpgxhOh8lj8vorFup%2BMJ6fe2rXRWgxFhK9B8xuP2XH%2F3878g6d8Jq2D2gINTgDDL7%2BB5%2FIWWlwInas40cQTsVngG8mWkzB788%3D"&sign_type="RSA"), Alipay::Mobile::Service.trade_app_pay_string({
-      out_trade_no: '1',
-      notify_url: '/some_url',
-      subject: 'subject',
-      total_fee: '0.01',
-      body: 'test'
-    }, {
-      sign_type: 'RSA',
-      key: TEST_RSA_PRIVATE_KEY
+    params = %q(app_id=1000000000000000&biz_content={"timeout_express":"30m","seller_id":"","product_code":"QUICK_MSECURITY_PAY","total_amount":"0.01","subject":"1","body":"test","out_trade_no":"1"}&charset=utf-8&method=alipay.trade.app.pay&sign_type=RSA&timestamp=2016-12-22 20:33:02&version=1.0)
+
+    assert_equal params, Alipay::Mobile::Service.trade_app_pay_string({
+      app_id: '1000000000000000',
+      key: TEST_RSA_PRIVATE_KEY,
+      biz_content: {
+        total_amount: '0.01',
+        subject: '1',
+        body: 'test',
+        out_trade_no: '1',
+      },
+      timestamp: '2016-12-22#20:33:02'
     })
   end
 end
