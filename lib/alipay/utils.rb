@@ -1,6 +1,6 @@
 module Alipay
   module Utils
-    require 'JSON'
+    require 'json'
     def self.stringify_keys(object)
       JSON.parse JSON[object]
     end
