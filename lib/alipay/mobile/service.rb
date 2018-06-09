@@ -21,7 +21,7 @@ module Alipay
         biz_string = new_biz_content.stringify_keys!
 
         options = {
-          'alipay_sdk' => 'alipay_sdk_ruby',
+          'alipay_sdk' => "alipay_sdk_ruby-#{Time.now.strftime('%Y%m%d')}",
           'app_id'        => options[:app_id] || Alipay.app_id,
           'biz_content'   => biz_string,
           'charset'       => 'utf-8',
