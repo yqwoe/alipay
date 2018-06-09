@@ -12,7 +12,7 @@ module Alipay
         biz_content = options[:biz_content]
         new_biz_content = {
           timeout_express: biz_content[:timeout_express] || '30m',
-          seller_id: '',
+          # seller_id: '',
           product_code:    biz_content[:product_code] || 'QUICK_MSECURITY_PAY',
         }
 
