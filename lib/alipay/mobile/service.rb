@@ -26,7 +26,7 @@ module Alipay
           'charset'       => 'utf-8',
           'method'        => 'alipay.trade.app.pay',
           'notify_url'    => options[:notify_url],
-          'sign_type'     => 'RSA',
+          'sign_type'     => 'RSA2',
           'timestamp'     => options[:timestamp] || Time.now.strftime('%Y-%m-%d#%H:%M:%S'),
           'version'       => '1.0',
         }
