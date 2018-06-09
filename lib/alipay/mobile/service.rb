@@ -21,6 +21,7 @@ module Alipay
         biz_string = new_biz_content.stringify_keys!
 
         options = {
+          'alipay_sdk' => 'alipay_sdk_ruby',
           'app_id'        => options[:app_id] || Alipay.app_id,
           'biz_content'   => biz_string,
           'charset'       => 'utf-8',
@@ -29,6 +30,7 @@ module Alipay
           'sign_type'     => 'RSA2',
           'timestamp'     => options[:timestamp] || Time.now.strftime('%Y-%m-%d#%H:%M:%S'),
           'version'       => '1.0',
+          'format' => 'json'
         }
 
         options = Utils.stringify_keys(options)
